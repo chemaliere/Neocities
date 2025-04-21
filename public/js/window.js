@@ -1,4 +1,4 @@
-// 🪟 Floating Announcement Window
+// 🪟 Floating Window
 
 // DOM Elements
 const windowBox = document.getElementById('window');
@@ -8,7 +8,7 @@ const closeBtn = document.getElementById('close-btn');
 const header = document.getElementById("window-header");
 const resizeHandle = document.getElementById("resize-handle");
 
-// Load saved state or default to minimized
+// Load minimized state
 const isMinimized = localStorage.getItem('windowMinimized');
 if (isMinimized === null || isMinimized === 'true') {
   windowBox.style.display = 'none';
@@ -18,7 +18,7 @@ if (isMinimized === null || isMinimized === 'true') {
   minimizedBar.style.display = 'none';
 }
 
-// Load window position/size if available
+// Load saved position and size
 const savedLeft = localStorage.getItem('windowLeft');
 const savedTop = localStorage.getItem('windowTop');
 const savedWidth = localStorage.getItem('windowWidth');
@@ -28,6 +28,24 @@ if (savedLeft) windowBox.style.left = `${savedLeft}px`;
 if (savedTop) windowBox.style.top = `${savedTop}px`;
 if (savedWidth) windowBox.style.width = `${savedWidth}px`;
 if (savedHeight) windowBox.style.height = `${savedHeight}px`;
+
+// --- Clamp window to viewport ---
+function clampToViewport() {
+  const rect = windowBox.getBoundingClientRect();
+  const margin = 10;
+  let x = rect.left;
+  let y = rect.top;
+
+  if (x < margin) x = margin;
+  if (y < margin) y = margin;
+  if (x + rect.width > window.innerWidth) x = window.innerWidth - rect.width - margin;
+  if (y + rect.height > window.innerHeight) y = window.innerHeight - rect.height - margin;
+
+  windowBox.style.left = `${x}px`;
+  windowBox.style.top = `${y}px`;
+}
+window.addEventListener('load', clampToViewport);
+window.addEventListener('resize', clampToViewport);
 
 // --- Minimize / Restore ---
 minimizeBtn.addEventListener('click', () => {
@@ -40,15 +58,17 @@ minimizedBar.addEventListener('click', () => {
   windowBox.style.display = 'block';
   minimizedBar.style.display = 'none';
   localStorage.setItem('windowMinimized', 'false');
+  clampToViewport(); // ensure it reopens inside view
 });
 
-// --- Close Button Disabled ---
-closeBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log("Close button disabled.");
+// --- Close Button ---
+closeBtn.addEventListener('click', () => {
+  windowBox.style.display = 'none';
+  minimizedBar.style.display = 'block';
+  localStorage.setItem('windowMinimized', 'true');
 });
 
-// --- Dragging Window ---
+// --- Dragging Logic ---
 let isDragging = false, offsetX = 0, offsetY = 0;
 
 header.addEventListener("mousedown", (e) => {
@@ -60,8 +80,13 @@ header.addEventListener("mousedown", (e) => {
 
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
-  windowBox.style.left = `${e.clientX - offsetX}px`;
-  windowBox.style.top = `${e.clientY - offsetY}px`;
+
+  const margin = 10;
+  const newX = Math.min(Math.max(margin, e.clientX - offsetX), window.innerWidth - windowBox.offsetWidth - margin);
+  const newY = Math.min(Math.max(margin, e.clientY - offsetY), window.innerHeight - windowBox.offsetHeight - margin);
+
+  windowBox.style.left = `${newX}px`;
+  windowBox.style.top = `${newY}px`;
 });
 
 document.addEventListener("mouseup", () => {
@@ -71,7 +96,7 @@ document.addEventListener("mouseup", () => {
   isDragging = false;
 });
 
-// --- Resizing Window ---
+// --- Resizing Logic ---
 resizeHandle.addEventListener("mousedown", (e) => {
   e.preventDefault();
   e.stopPropagation();
@@ -82,8 +107,8 @@ resizeHandle.addEventListener("mousedown", (e) => {
   const startHeight = windowBox.offsetHeight;
 
   function doResize(e) {
-    const newWidth = startWidth + (e.clientX - startX);
-    const newHeight = startHeight + (e.clientY - startY);
+    const newWidth = Math.max(150, startWidth + (e.clientX - startX));
+    const newHeight = Math.max(100, startHeight + (e.clientY - startY));
     windowBox.style.width = `${newWidth}px`;
     windowBox.style.height = `${newHeight}px`;
   }
@@ -98,7 +123,7 @@ resizeHandle.addEventListener("mousedown", (e) => {
   document.addEventListener("mouseup", stopResize);
 });
 
-// --- Save Position & Size to localStorage
+// --- Save Position & Size to localStorage ---
 function savePositionAndSize() {
   const rect = windowBox.getBoundingClientRect();
   localStorage.setItem('windowLeft', rect.left);
