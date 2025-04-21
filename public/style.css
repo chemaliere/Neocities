@@ -1,16 +1,16 @@
 /* Root theme */
 :root {
   --canvas-width: 100%;
-  --main-color: orange;
-  --text-color: orange;
-  --bg-dark: #333;
-  --bg-light: white;
-  --notepad-color: #fffdf3;
-  --notepad-midtone: #ffce7b;
-  --notepad-border: #fdfbe7;
-  --highlight: #fffce3;
+  --main-color: #d8d8f0;
+  --main-dark: #b0b0f0;
+  --text-color: #333333;
+  --bg-dark: #8888aa;
+  --bg-light: #ffffff;
+  --notepad-color: white;
+  --notepad-midtone: #b0b0f0;
+  --notepad-border: #aaaaff;
+  --highlight: #d8d8f0;
 }
-
 
 /*Link Styling*/
 a:link {
