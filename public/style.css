@@ -85,7 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url('images/pixelNews.png') no-repeat center center fixed;
+  background: url('images/purpleNews.png') no-repeat center center fixed;
   background-size: cover;
 
 }
