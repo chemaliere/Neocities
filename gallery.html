@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RECORD 404</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- Firebase SDKs (non module version for Neocities) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  
+    <style>
+    body {
+      background: whitesmoke;
+      font-family: 'BetterPixels';
+      color: orange;
+      text-align: center;
+    }
+
+    .gallery-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .drawbox-card {
+      width: 350px;
+      background-color: white;
+      border: 2px solid orange;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-header {
+      background: white;
+      width: 100%;
+      padding: 10px;
+      border-bottom: 2px solid orange;
+      font-size: 20px;
+    }
+
+    .card-canvas {
+      width: 100%;
+      height: auto;
+    }
+
+    .card-footer {
+      width: 100%;
+      border-top: 2px solid orange;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .heart-btn {
+      font-size: 20px;
+      cursor: pointer;
+      color: orange;
+      border: none;
+      background: transparent;
+      transition: transform 0.2s ease;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎨 Gallery</h1>
+    <h3>Drawings by me and you!</h3>
+      <div class="navbar">
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='about.html'">About</button>
+        <button onclick="location.href='devlog.html'">Devlog</button>
+        <button onclick="location.href='gallery.html'">Gallery</button>
+        <button onclick="location.href='https://toyhou.se/chemaliere'">Toyhouse</button>
+      </div>
+  </header>
+  
+  <div class="gallery-wrapper" id="gallery"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-yQhh5xtiGKrBwLx3pjPD3-s6loAoz1c",
+      authDomain: "neocities-drawbox.firebaseapp.com",
+      databaseURL: "https://neocities-drawbox-default-rtdb.firebaseio.com",
+      projectId: "neocities-drawbox",
+      storageBucket: "neocities-drawbox.appspot.com",
+      messagingSenderId: "1019564665542",
+      appId: "1:1019564665542:web:1644eb71dac2ed748505c7"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const gallery = document.getElementById("gallery");
+
+    function formatDate(dateString) {
+      if (!dateString) return "Unknown";
+      const date = new Date(dateString);
+      if (isNaN(date)) return "Invalid Date";
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    function createCard(data) {
+      const card = document.createElement("div");
+      card.className = "drawbox-card";
+
+      const header = document.createElement("div");
+      
+      header.className = "card-header";
+      header.textContent = `📅 ${formatDate(data.timestamp)}`;
+      card.appendChild(header);
+
+      const img = document.createElement("img");
+      img.className = "card-canvas";
+      img.src = data.dataURL;
+      img.alt = "User drawing";
+      card.appendChild(img);
+
+      const footer = document.createElement("div");
+      footer.className = "card-footer";
+      footer.innerHTML = `<button class="heart-btn" title="Love this">❤️</button>`;
+      card.appendChild(footer);
+
+      return card;
+    }
+
+    const cardsById = {};
+
+    // Live listener for new drawings
+    db.ref("Drawbox").on("child_added", snapshot => {
+      const data = snapshot.val();
+      const key = snapshot.key;
+
+      if (!data || !data.dataURL || data.hidden) return;
+
+      if (!cardsById[key]) {
+        const card = createCard(data);
+        cardsById[key] = card;
+        gallery.appendChild(card);
+      }
+    });
+
+    // Update listener to remove hidden images
+    db.ref("Drawbox").on("child_changed", snapshot => {
+      const data = snapshot.val();
+      const key = snapshot.key;
+
+      const existingCard = cardsById[key];
+
+      if (data.hidden) {
+        if (existingCard) {
+          existingCard.remove();
+          delete cardsById[key];
+        }
+      } else {
+        if (!existingCard) {
+          const newCard = createCard(data);
+          cardsById[key] = newCard;
+          gallery.appendChild(newCard);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

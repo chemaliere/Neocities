@@ -1,0 +1,127 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+
+/* General styling */
+body {
+    font-family: "Courier New", monospace;
+    font-size: 24;
+    background-color: whitesmoke;
+    color: orange;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title styling */
+header {
+    width: 100%;
+    padding: 1em;
+    background-color: #333;
+    color: orange;
+    text-align: center;
+}
+
+/* Banner container styling */
+.banner {
+  width: 100%;
+  background-color: orange;
+  color: white;
+  padding: 1em 0;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Styling for the marquee text */
+.banner marquee {
+  color: white;
+  font-size: 1.2em;
+}
+
+.banner {
+  background-color: orange;
+  margin: 5;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Pause on hover */
+.scrolling-text:hover {
+  animation-play-state: paused;
+}
+
+/* Styling for the navigation bar */
+.navbar {
+  width: 100%;
+  background-color: #333;
+  overflow: hidden;
+  text-align: center;
+  padding: 0.5em 0;
+}
+
+/* Styling for each button */
+.navbar button {
+    font-family: "Courier New", monospace;
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for buttons */
+.navbar button:hover {
+    background-color: #555;
+}
+  
+/* Main container styling */
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 1em;
+}
+
+/* Column styling */
+.left-column, .right-column, .center-column {
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.left-column, .right-column {
+    flex: 1;
+    background-color: #f4f4f4;
+    margin: 0 0.5em;
+    color: black; /* Ensure contrast with light background */
+}
+
+.center-column {
+    flex: 3; /* Wider center column */
+    background-color: #eaeaea;
+    text-align: center;
+    color: black; /* Ensure contrast with light background */
+}
+
+p {
+    color: orange; /* Paragraph text styling */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-column, .right-column {
+        margin: 0.5em 0;
+    }
+}
+

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> 
+  <link rel="icon" type="image/x-icon" href="/images/mametchi.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="css" href="drawbox.css">
+  <title>RECORD 404</title>
+  <style>
+  /* Main window box */
+      #window {
+        position: fixed;
+        top: 50px;
+        left: 100px;
+        width: 300px;
+        min-width: 200px;
+        min-height: 250px;
+        height: auto;
+        background: #fdfbe7; /* border notepad yellow */
+        border: 2px solid orange;
+        border-radius: 8px;
+        z-index: 9999;
+        font-size: 14px;
+        box-shadow: 4px 4px #ccc;
+        display: none; /* Initially hidden if minimized */
+        overflow: hidden;
+      }
+      
+      /* Resize handle bottom-right */
+      #resize-handle {
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        cursor: se-resize;
+        background: orange;
+        border-top-left-radius: 4px;
+      }
+      
+      /* Header for dragging */
+      #window-header {
+        background: #ffce7b; /* medium-orange */
+        padding: 6px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: move;
+        font-weight: bold;
+        font-size: 22px;
+      }
+      
+      /* Minimize and close buttons */
+      .window-controls button {
+        background: #fff49f;
+        border: 1px solid #aaa;
+        width: 20px;
+        height: 20px;
+        margin-left: 4px;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      
+      /* Content inside the window */
+      .content {
+        font-family: BetterPixels;
+        font-weight: bold;
+        padding: 6px;
+        border: 2px dotted orange;
+        margin: 10px;
+        font-size: 18px;
+        background: #fffdf3;
+        border-radius: 6px;
+      }
+      
+      /* Minimized bar */
+      #minimized-bar {
+        position: fixed;
+        bottom: 0;
+        left: 10px;
+        background: #fdfbe7; /* notepad yellow*/
+        border: 2px solid orange;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        padding: 5px 10px;
+        font-weight: bold;
+        font-size: 22px;
+        cursor: pointer;
+        display: block; /* Visible on first load if minimized */
+        z-index: 9998;
+      }
+
+    
+  </style>
+</head>
+
+<body>
+  <!-- Title Section -->
+  <header>
+    <h1>📼 RECORD 404</h1>
+    <h3>Welcome to the brain chasm! Site is still under construction, so please be patient!</h3>
+    <div class="navbar">
+      <button onclick="location.href='index.html'">Home</button>
+      <button onclick="location.href='about.html'">About</button>
+      <button onclick="location.href='devlog.html'">Devlog</button>
+      <button onclick="location.href='gallery.html'">Gallery</button>
+      <button onclick="location.href='https://toyhou.se/chemaliere'">Toyhouse</button>
+    </div>
+  </header>
+
+  <!-- Scrolling Banner -->
+  <div class="banner">
+    <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+      Announcement: Tomodachi life is on its way!!!
+    </marquee>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+  
+    <!-- Left Column -->
+    <div class="left-column">
+      
+      <!--Slideshow-->
+      <div class="slideshow-wrapper">
+        <div id="slideshow-container">
+          <img class="slideshow-image active" src="images/test.jpg" alt="Image 1">
+          <img class="slideshow-image" src="images/comm1.png" alt="Image 2">
+          <img class="slideshow-image" src="images/test2.jpg" alt="Image 3">
+        </div>
+      
+        <div id="slideshow-control-bar">
+          <button id="prev-btn" class="slideshow-bar-button">◀</button>
+          <button id="slideshow-toggle" class="slideshow-bar-button">
+            <svg id="slideshow-icon" viewBox="0 0 24 24" width="24" height="24" fill="orange">
+              <rect x="6" y="5" width="4" height="14"/>
+              <rect x="14" y="5" width="4" height="14"/>
+            </svg>
+          </button>
+          <button id="next-btn" class="slideshow-bar-button">▶</button>
+        </div>
+      </div>
+      
+      <br><hr>
+          
+      <h2>📂 Directory</h2> 
+      <h3>‣ Projects</h3>
+      <ul class="orange-text"> 
+        <li><a href="http://vocaloidmerch.carrd.co">Rhapsody: Vocaloid Merch Box</a></li>
+        <li><a href="http://chemaliere.neocities.org">Tamago: Work in Progress</a></li>
+        <li><a href="http://chemaliere.neocities.org">Work in Progress</a></li>
+      </ul>
+      <h3>‣ Original Characters</h3> 
+      <ul class="orange-text">
+        <li><a href="pages/ocs.html">The Nightly Feast</a></li>
+        <li>Obsidian Chevalier</li>
+        <li>Rust / Corrosion</li>
+      </ul>
+    </div>
+    
+    <!-- Center Column -->
+    <div class="center-column">
+    
+      <!--Updates-->
+        <div class="updates-window">
+          <div class="updates-titlebar">
+            Status Updates
+          </div>
+          <div class="updates-content">
+            <span class="gray">Latest post:</span> <a href="pages/projects.html">Projects</a>
+            <br>---<br><span class="gray">Apr 19 2025:</span> Tomodachi Life and Deltarune coming out, I'm so hyped!! <a href="link"></a>
+            <br><br><span class="gray">Apr 19 2025:</span> started this site in December but only started working on it now XD <a href="link"></a>
+          </div>
+        </div>
+        
+        <br>
+    
+      <!--Header-->
+        <div class="updates-window">
+          <div class="updates-titlebar">
+            <span style="font-family: BetterPixels;">Submit a drawing to the gallery!</span> Draw something!
+          </div>
+        </div>
+      
+      <!--Videos-->
+      <!--<iframe width="248" height="140" src="https://www.youtube.com/embed/nHfOrEbocT4?si=KQU8m159b_MDA8PU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+    
+      <!--<img class src="ui/linediv3.png" alt="line divider" width="500" height="30">-->
+      
+      <!-- DrawBox Canvas -->
+      <div class="canvas-wrapper">
+        <div class="canvas-container">
+          <div class="toolbar">
+            <button id="undo-button" title="Undo Last Stroke" class="icon-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="orange" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.207 2.293a1 1 0 0 1 0 1.414L10.914 5H12.5c4.652 0 8.5 3.848 8.5 8.5S17.152 22 12.5 22 4 18.152 4 13.5a1 1 0 1 1 2 0c0 3.548 2.952 6.5 6.5 6.5s6.5-2.952 6.5-6.5S16.048 7 12.5 7h-1.586l1.293 1.293a1 1 0 0 1-1.414 1.414l-3-3a1 1 0 0 1 0-1.414l3-3a1 1 0 0 1 1.414 0z"/>
+              </svg>
+            </button>
+            <div class="slider-container">
+              <input type="range" id="sizePicker" min="1" max="40" value="5" class="slider" />
+            </div>
+            <button id="color-button">
+              <input type="color" id="colorPicker" value="" />
+            </button>
+          </div>
+    
+          <canvas id="drawCanvas" width="350" height="350"></canvas>
+          
+          <div id="saveLink" class="send-button-wrapper" style="cursor: pointer;">
+              Send Anonymously 🎨🤫
+          </div>
+    
+        </div>
+        
+      </div>
+      
+        <div class="updates-window">
+          <div class="updates-titlebar">
+            <span style="font-family: BetterPixels;">WIP</span>
+          </div>
+        </div>
+      
+      <h2>< stamps will go here ></h2>
+      
+      <!-- Announcement Window -->
+      <div id="window">
+        <div id="window-header">
+          📢 Message
+          <div class="window-controls">
+            <button id="minimize-btn">−</button>
+            <button id="close-btn">×</button>
+          </div>
+        </div>
+        <div class="content">
+          <p>🌟 Welcome to the site! New features are being added every so often.</p>
+          <p>🧠 Check out the gallery tab for art from drawbox users.</p>
+          <p>🎨 Have fun!</p>
+          <p> To Do: <br>
+            - Clean up code (move scripts, make a base.html for navbar) <br>
+            - Draw and Customize Aesthetics
+          </p>
+        </div>
+        <div id="resize-handle"></div>
+      </div>
+      
+      <div id="minimized-bar">📢 Message</div>
+
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <h2>♥ Favorites</h2>
+      <h3>‣ Current Interests</h3>
+      <ol class="orange-text">
+        <li>Project Zomboid</li>
+        <li>Chiikawa</li>
+        <li>Portal</li>
+      </ol>
+      <h3>‣ Other Interests</h3>
+      <div class="scrolldiv">
+        <ol class="orange-text">
+          <li>Silent Hill</li>
+          <li>No Home</li>
+          <li>Houseki no Kuni</li>
+          <li>Stardew Valley</li>
+          <li>Mili</li>
+          <li>RPG Maker</li>
+        </ol>
+      </div>
+      
+      <div class="generic-wrapper">
+        <div class="generic-wrapper-header">Music</div>
+        <div class="generic-wrapper-content">
+          <iframe 
+            width="100%" height="100%" src="https://www.youtube.com/embed/nHfOrEbocT4?si=KQU8m159b_MDA8PU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="flex-bottom footer">
+    RECORD 404 © 2025
+  </div>
+
+  <!-- STAMPS -->
+  <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" style="z-index=1;">
+    <img src="/images/neocities.png" alt="neocities">
+  </marquee>
+
+  <!--Scripts-->
+  <!-- Firebase App + Realtime DB (Compat version for Neocities) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-yQhh5xtiGKrBwLx3pjPD3-s6loAoz1c",
+      authDomain: "neocities-drawbox.firebaseapp.com",
+      databaseURL: "https://neocities-drawbox-default-rtdb.firebaseio.com",
+      projectId: "neocities-drawbox",
+      storageBucket: "neocities-drawbox.appspot.com",
+      messagingSenderId: "1019564665542",
+      appId: "1:1019564665542:web:1644eb71dac2ed748505c7"
+    };
+  
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  
+  <!--Local Drawbox Script-->
+  <script src="js/drawbox.js"></script>
+  <script src="js/window.js"></script>
+  <script src="js/slideshow.js"></script>
+
+</body>
+</html>

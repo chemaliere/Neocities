@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Betterpixels', monospace;
+      background-color: #fdfdfe;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 30%;
+      background-color: #dfe1ff;
+      padding: 30px;
+      border-right: 2px solid #aaa;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .main-content {
+      width: 70%;
+      padding: 40px;
+      overflow-y: auto;
+      background-color: #ffffff;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .pixel-window {
+      background-color: #e0e0ff;
+      border: 2px solid #888;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-shadow: 3px 3px #999;
+    }
+
+    .button-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .window-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-left: 6px;
+    }
+
+    .minimize {
+      background-color: #ffcc00;
+    }
+
+    .close {
+      background-color: #ff4d4d;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background-color: #f4f4ff;
+      border: 2px dashed #999;
+      padding: 15px;
+      box-shadow: 2px 2px 0 #bbb;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #aaa;
+      margin-bottom: 10px;
+    }
+
+    .project-card h2 {
+      font-size: 1.1em;
+      margin: 0 0 0.5em;
+    }
+
+    .project-card p {
+      font-size: 0.9em;
+      line-height: 1.4em;
+    }
+
+    a {
+      color: #4444cc;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #000099;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <a href="/index.html" class="back-btn">← Back</a>
+      <div class="pixel-window">
+        <strong>My Projects</strong><br><br>
+        🎮 Games<br>
+        🖼️ Art<br>
+        💾 Code<br>
+      </div>
+
+      <div class="pixel-window">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/guestbook.html">Guestbook</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h1>Projects ✧</h1>
+      <div class="project-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <img src="your-image1.png" alt="Project 1">
+          <h2>Tomodachi Web</h2>
+          <p>A fan shrine for Tomodachi Life with character bios and a virtual plaza!</p>
+          <a href="https://yourprojectlink.com">View project →</a>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <img src="your-image2.gif" alt="Project 2">
+          <h2>Pixel Blog Engine</h2>
+          <p>Custom-coded blog system with retro UI and keyboard controls.</p>
+          <a href="https://yourbloglink.com">Read blog →</a>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <img src="your-image3.jpg" alt="Project 3">
+          <h2>Vaporwave Music Player</h2>
+          <p>Aesthetic player with playlists, glowing UI, and draggable windows.</p>
+          <a href="#">Coming soon ✧</a>
+        </div>
+
+        <!-- Add more project cards as needed -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

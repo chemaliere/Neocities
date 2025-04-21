@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📝 Devlog</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <style>
+    .post-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      
+    }
+
+    .post-container {
+      border: 2px solid orange;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 4px 4px #ccc;
+      overflow: hidden;
+    }
+
+    .post-title {
+      color: orange;
+      font-weight: bold;
+      font-size: 26px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-family: BetterPixels;
+    }
+
+    .post-content {
+      font-size: 24px;
+      color: black;
+      white-space: pre-line;
+      line-height: 1.4;
+      font-family: BetterPixels;
+    }
+
+    .post-date {
+      font-size: 12px;
+      color: gray;
+      margin-top: 12px;
+      text-align: right;
+      font-family: monospace;
+    }
+
+    #pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 20px;
+      font-family: BetterPixels;
+    }
+
+    #pagination-controls button {
+      background-color: white;
+      color: orange;
+      border: 2px solid orange;
+      border-radius: 8px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-family: BetterPixels;
+      font-size: 22px;
+    }
+
+    #pagination-controls button:hover {
+      background-color: orange;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 Devlog</h1>
+    <h3>Stay in the loop on Record 404!</h3>
+    <div class="navbar">
+      <button onclick="location.href='index.html'">Home</button>
+      <button onclick="location.href='about.html'">About</button>
+      <button onclick="location.href='devlog.html'">Devlog</button>
+      <button onclick="location.href='gallery.html'">Gallery</button>
+      <button onclick="location.href='https://toyhou.se/chemaliere'">Toyhouse</button>
+    </div>
+  </header>
+  <div id="post-container" class="post-wrapper"></div>
+
+  <div id="pagination-controls">
+    <button id="prev-btn">← Previous</button>
+    <span id="page-label" style="font-size: 22px; color:white;">Page 1</span>
+    <button id="next-btn">Next →</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-yQhh5xtiGKrBwLx3pjPD3-s6loAoz1c",
+      authDomain: "neocities-drawbox.firebaseapp.com",
+      databaseURL: "https://neocities-drawbox-default-rtdb.firebaseio.com",
+      projectId: "neocities-drawbox",
+      storageBucket: "neocities-drawbox.appspot.com",
+      messagingSenderId: "1019564665542",
+      appId: "1:1019564665542:web:1644eb71dac2ed748505c7"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+  
+  </script>
+  
+    // Pagination
+  <script>
+    const postsPerPage = 5;
+    let allPosts = [];
+    let currentPage = 1;
+
+    const postContainer = document.getElementById('post-container');
+    const pageLabel = document.getElementById('page-label');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    db.ref("devlog").on("value", (snapshot) => {
+      const data = snapshot.val();
+      allPosts = Object.entries(data || {})
+        .filter(([_, v]) => !v.hidden)
+        .map(([id, val]) => ({ id, ...val }))
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      renderPage(currentPage);
+    });
+    
+    function renderPage(page) {
+      const start = (page - 1) * postsPerPage;
+      const pagePosts = allPosts.slice(start, start + postsPerPage);
+
+      postContainer.innerHTML = "";
+
+      pagePosts.forEach(post => {
+        const postEl = document.createElement("div");
+        postEl.className = "post-container";
+
+        postEl.innerHTML = `
+          <div class="post-title">${post.title}</div>
+          <div class="post-content">${(post.content || "").replace(/\n/g, "<br>")}</div>
+          <div class="post-date"> ${new Date(post.date).toLocaleString()}</div>
+        `;
+
+        postContainer.appendChild(postEl);
+      });
+
+      pageLabel.textContent = `Page ${currentPage}`;
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = start + postsPerPage >= allPosts.length;
+    }
+
+    prevBtn.onclick = () => {
+      if (currentPage > 1) renderPage(--currentPage);
+    };
+    nextBtn.onclick = () => {
+      if ((currentPage - 1) * postsPerPage + postsPerPage < allPosts.length)
+        renderPage(++currentPage);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Taking a peek at the code? You probably won't find anything useful, but have fun! -->
+
+  <head>
+      <title>RECORD 404</title>
+      <meta charset="UTF-8">
+      <link rel="icon" type="image/x-icon" href="/images/mametchi.png">
+    	<!--<link href="style.css" rel="stylesheet" type="text/css" media="all">-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+          /* General styling */
+          body {
+              font-family: "Courier New", monospace;
+              font-size: 24;
+              background-color: whitesmoke;
+              color: orange;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+          }
+  
+          /* Title styling */
+          header {
+              width: 100%;
+              padding: 1em;
+              background-color: #333;
+              color: orange;
+              text-align: center;
+          }
+  
+        /* Banner container styling */
+        .banner {
+            width: 100%;
+            background-color: orange;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* Styling for the marquee text */
+        .banner marquee {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .banner {
+            background-color: orange;
+            margin: 5;
+            padding: 0;
+            display: flex;
+            align-items: center;
+          }
+
+        /* Pause on hover */
+        .scrolling-text:hover {
+            animation-play-state: paused;
+        }
+        
+          /* Styling for the navigation bar */
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+            padding: 0.5em 0;
+        }
+
+          /* Styling for each button */
+          .navbar button {
+              font-family: "Courier New", monospace;
+              background-color: #444;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              font-size: 1em;
+              cursor: pointer;
+              margin: 0 5px;
+              border-radius: 5px;
+              transition: background-color 0.3s;
+          }
+  
+          /* Hover effect for buttons */
+          .navbar button:hover {
+              background-color: #555;
+          }
+            
+          /* Main container styling */
+          .container {
+              display: flex;
+              width: 80%;
+              max-width: 1200px;
+              margin-top: 1em;
+          }
+  
+          /* Column styling */
+          .left-column, .right-column, .center-column {
+              padding: 1em;
+              box-sizing: border-box;
+          }
+  
+          .left-column, .right-column {
+              flex: 1;
+              background-color: #f4f4f4;
+              margin: 0 0.5em;
+              color: black; /* Ensure contrast with light background */
+          }
+  
+          .center-column {
+              flex: 3; /* Wider center column */
+              background-color: #eaeaea;
+              text-align: center;
+              color: black; /* Ensure contrast with light background */
+          }
+  
+          p {
+              color: orange; /* Paragraph text styling */
+          }
+  
+          /* Responsive design for smaller screens */
+          @media (max-width: 768px) {
+              .container {
+                  flex-direction: column;
+              }
+  
+              .left-column, .right-column {
+                  margin: 0.5em 0;
+              }
+          }
+        
+      </style>
+
+  </head>
+  <body>
+  
+      <!-- Title Section -->
+      <header>
+          <h1>RECORD 404</h1>
+          <p>
+            Welcome to my brain chasm! Feel free to take a look around!
+          </p>
+          <!-- Navigation Section -->
+          <div class="navbar">
+              <button onclick="location.href='index.html'">Home</button>
+              <button onclick="location.href='about.html'">About</button>
+              <button onclick="location.href='template.html'">Blog</button>
+              <button onclick="location.href='index.html'">Portfolio</button>
+              <button onclick="location.href='https://toyhou.se/chemaliere'">Toyhouse</button>
+          </div>
+      </header>
+      
+
+      
+    <!-- Scrolling Announcement Banner -->
+      <div class="banner">
+        <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+            Announcement! More stuff coming soon!
+        </marquee>
+      </div>
+                  
+      <!-- Main Container -->
+      <div class="container">
+          <!-- Left Column -->
+          <div class="left-column">
+              <h2>Directory</h2>
+              <p> </p>
+                <h3>Projects</h3>
+                <ul style="color: orange;"> 
+                  <li><a href="http://vocaloidmerch.carrd.co">Rhapsody: Vocaloid Merch Box</a></li>
+                  <li><a href="http://chemaliere.neocities.org">Tamago: Work in Progress</a></li>
+                  <li><a href="http://chemaliere.neocities.org">Work in Progress</a></li>
+                </ul>
+                  <h3>Original Worlds</h3> 
+                  <ul style="color: orange;">
+                  <li><a href = "http://chemaliere.neocities.org"> Silent Room </a></li>
+                  <li>Obsidian Chevalier</li>
+                  <li>Rust / Corrosion</li>
+                </ul>
+          </div>
+  
+          <!-- Center Column -->
+          <div class="center-column">
+              <h2>Things on my mind</h2>
+              <p> </p>
+                <iframe width="248" height="140" src="https://www.youtube.com/embed/nHfOrEbocT4?si=KQU8m159b_MDA8PU" title="YouTube video player" frameborder="0" allow="acceleromete; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <br>
+                <iframe width="248" height="140" src="https://www.youtube.com/embed/4Dr7HljrsoQ?si=20AQyqjzdK5LcvRc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+  
+          <!-- Right Column -->
+          <div class="right-column">
+              <h2>Favorites</h2>
+              <p> </p>
+              <h3>Current Interests</h3>
+                <ol style="color: orange;">
+                <li>Project Zomboid</li>
+                <li>Alien Stage</li>
+                <li>Portal</li>
+              </ol>
+              
+              <h3>Other Interests</h3>
+              <ol style="color: orange;">
+                <li>Silent Hill</li>
+                <li>No Home</li>
+                <li>Houseki no Kuni</li>
+                <li>Stardew Valley</li>
+                <li>Mili</li>
+                <li>MXTX</li>
+              </ol>
+          </div>
+      </div>
+    <div class="flex-bottom footer" style="text-align:center;margin-top:12px;margin-bottom:5px;">
+        RECORD 404 © 2025
+    </div>
+        <!--STAMPS-->
+        <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+            <img src="/images/neocities.png" alt ="neocities">
+            
+        </marquee>
+
+    </body>
+</html>
